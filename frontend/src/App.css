@@ -65,3 +65,7 @@
 .flow-builder-wrap {
   min-height: 400px;
 }
+
+.condition-node {
+  width: 100%;
+}

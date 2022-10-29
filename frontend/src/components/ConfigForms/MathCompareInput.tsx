@@ -6,58 +6,77 @@ import { SmileOutlined } from "@ant-design/icons";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Row, Col } from "antd";
 
-const BlockInput: React.FC = () => {
-  const { selectedNode: node } = useContext(BuilderContext) as any;
+const items = [
+  {
+    key: "lt",
+    label: "Less then",
+  },
+  {
+    key: "lte",
+    label: "Less then equal",
+  },
+  {
+    key: "gt",
+    label: "Greater then",
+  },
+  {
+    key: "gte",
+    label: "Greater then equal",
+  },
+  {
+    key: "eq",
+    label: "Equal",
+  },
+  {
+    key: "eq",
+    label: "Not equal",
+  },
+];
 
+const MathCompareInput: React.FC = () => {
+  const { selectedNode: node } = useContext(BuilderContext) as any;
+  console.log("node", node);
   const { closeDrawer: cancel, saveDrawer: save } = useDrawer();
-  const [selectedValue, setSelectedValue] = useState("timestamp");
+  const [selectedValue, setSelectedValue] = useState(node?.data?.label) as any;
+  const [form] = Form.useForm();
 
   const handleSubmit = async () => {
-    save({ label: selectedValue, command: "", state: "", ret: "" });
+    const values = await form.validateFields();
+    save({ label: selectedValue, command: "", state: values, ret: "" });
   };
   const onClick: MenuProps["onClick"] = (data) => {
-    setSelectedValue(data.key);
-    save?.({ label: data.key, command: "", state: "", ret: "" }); //TODO:
+    console.log(data);
+    const item = items.find((i) => i.key == data.key);
+    setSelectedValue(item?.label);
+    console.log(item);
+    // save({ label: item?.label, command: "", state: "", ret: "" });
   };
 
-  const menu = (
-    <Menu
-      onClick={onClick}
-      items={[
-        {
-          key: "timestamp",
-          label: "Timestamp",
-        },
-        {
-          key: "coinbase",
-          label: "Coinbase",
-        },
-        {
-          key: "baseFee",
-          label: "Base Fee",
-        },
-        {
-          key: "gasLimit",
-          label: "Gas Limit",
-        },
-        {
-          key: "number",
-          label: "Number",
-        },
-      ]}
-    />
-  );
+  const menu = <Menu onClick={onClick} items={items} />;
 
   return (
     <div>
-      <Dropdown overlay={menu}>
-        <a onClick={(e) => e.preventDefault()}>
-          <Space>
-            {selectedValue}
-            <DownOutlined />
-          </Space>
-        </a>
-      </Dropdown>
+      <Form
+        style={{ gap: "10px", display: "flex", alignItems: "center" }}
+        form={form}
+        initialValues={node.data || { name: node.name }}
+      >
+        <Dropdown overlay={menu}>
+          <a onClick={(e) => e.preventDefault()}>
+            <Space>
+              {selectedValue || "Select Value"}
+              <DownOutlined />
+            </Space>
+          </a>
+        </Dropdown>
+        <Form.Item
+          style={{ marginBottom: "0px" }}
+          name="number"
+          rules={[{ required: true }]}
+        >
+          <Input type="number" />
+        </Form.Item>
+      </Form>
       <Divider />
       <div>
         <Button onClick={cancel}>Cancel</Button>
@@ -69,4 +88,4 @@ const BlockInput: React.FC = () => {
   );
 };
 
-export default BlockInput;
+export default MathCompareInput;
