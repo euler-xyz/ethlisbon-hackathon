@@ -1,71 +1,69 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 pragma solidity ^0.8.4;
 
 // Modified from: https://github.com/weiroll/safe-module/blob/main/contracts/WeirollModule.sol
-
 import "@gnosis.pm/safe-contracts/contracts/GnosisSafe.sol";
-// import "@weiroll/weiroll/contracts/VM.sol";
+import "@weiroll/weiroll/contracts/VM.sol";
+ 
+contract WeirollModule is VM {
+     string public constant NAME = "Weiroll Module";
+     string public constant VERSION = "0.1.0";
 
-contract WeirollModule {
-    // string public constant NAME = "Weiroll Module";
-    // string public constant VERSION = "0.1.0";
+     // This mapping represents specific script than can be executed
+     // Safe -> Script Hash -> Allowed
+     mapping(address => mapping(bytes32 => bool)) allowedScript;
 
-    // // @TODO WE WANT TO BE ABLE TO CAST BUT GNOSISSAFE ALSO HAS EXECUTOR
-    // /// Weiroll VM
-    // address public vm;
+     event OrderCreated(address indexed module, bytes32 indexed scriptHash, bytes32[] commands, bytes[] state);
+     event OrderRemoved(address indexed module, bytes32 indexed scriptHash);
 
-    // // This mapping represents executors that can execute any script.
-    // // Safe -> Executor -> Authorized
-    // mapping(address => mapping(address => bool)) executor;
+     constructor() {}
 
-    // // This mapping represents executors that can execute a specific script.
-    // // Safe -> Executor -> Script Hash -> Authorized
-    // mapping(address => mapping(address => mapping(bytes32 => bool))) scriptExecutor;
+     function addAllowedScript(bytes32[] memory commands, bytes[] memory state) public {
+        bytes32 scriptHash = keccak256(abi.encode(commands, state));
+        allowedScript[msg.sender][scriptHash] = true;
 
-    // constructor(address _vm) {
-    //     vm = _vm;
-    // }
+        emit OrderCreated(msg.sender, scriptHash, commands, state);
+     }
 
-    // function addScriptExecutor(address executor, bytes32 scriptHash) public {
-    //     scriptExecutor[msg.sender][executor][scriptHash] = true;
-    // }
+     function removeAllowedScript(bytes32 scriptHash) public {
+        require(allowedScript[msg.sender][scriptHash], "must be allowed first");
+        allowedScript[msg.sender][scriptHash] = false;
 
-    // function removeScriptExecutor(address executor, bytes32 scriptHash) public {
-    //     scriptExecutor[msg.sender][executor][scriptHash] = false;
-    // }
+        emit OrderRemoved(msg.sender, scriptHash);
+     }
 
-    // function addExecutor(address executor) public {
-    //     executors[msg.sender][executor] = true;
-    // }
+     function execute(bytes32[] calldata commands, bytes[] memory state)
+        public
+        payable
+        returns (bytes[] memory)
+    {
+        return _execute(commands, state);
+    }
 
-    // function removeExecutor(address executor) public {
-    //     executors[msg.sender][executor] = false;
-    // }
+     function executeWeiroll(
+         GnosisSafe safe,
+         bytes32[] calldata commands,
+         bytes[] memory state
+     ) public {
+        require(allowedScript[address(safe)][keccak256(abi.encode(commands, state))],
+            "not allowed to execute"
+        );
 
-    // function executeWeiroll(
-    //     GnosisSafe safe,
-    //     bytes32[] calldata commands,
-    //     bytes[] memory state
-    // ) public {
-    //     require(
-    //         executors[address(safe)][msg.sender] ||
-    //             scriptExecutor[address(safe)][msg.sender][keccak256(commands)],
-    //         "not authorized to execute"
-    //     );
+        bytes memory data = abi.encodeWithSignature(
+            "execute(bytes32[],bytes[])",
+            commands,
+            state
+        );
 
-    //     bytes memory data = abi.encodeWithSignature(
-    //         "execute(bytes32[],bytes[])",
-    //         commands,
-    //         state
-    //     );
-
-    //     require(
-    //         safe.execTransactionFromModule(
-    //             vm,
-    //             0,
-    //             data,
-    //             Enum.Operation.DelegateCall
-    //         ),
-    //         "could not execute script"
-    //     );
-    // }
+        require(
+            safe.execTransactionFromModule(
+                address(this),
+                0,
+                data,
+                Enum.Operation.DelegateCall
+            ),
+            "could not execute script"
+        );
+     }
 }

@@ -91,6 +91,6 @@
   },
   "dependencies": {
     "@gnosis.pm/safe-contracts": "^1.3.0",
-    "@weiroll/weiroll": "github:weiroll/weiroll"
+    "@weiroll/weiroll": "github:MickdeGraaf/weiroll"
   }
 }
