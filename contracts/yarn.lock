@@ -1077,6 +1077,11 @@
     "table" "^6.8.0"
     "undici" "^5.4.0"
 
+"@openzeppelin/contracts@^4.7.3":
+  "integrity" "sha512-dGRS0agJzu8ybo44pCIf3xBaPQN/65AIXNgK8+4gzKd5kbvlqyxryUYVLJv7fK98Seyd2hDZzVEHSWAh0Bt1Yw=="
+  "resolved" "https://registry.npmjs.org/@openzeppelin/contracts/-/contracts-4.7.3.tgz"
+  "version" "4.7.3"
+
 "@scure/base@~1.1.0":
   "integrity" "sha512-ZxOhsSyxYwLJj3pLZCefNitxsj093tb2vq90mp2txoYeBqbcjDjqFhyM8eUjq/uFm6zJ+mUuqxlS2FkuSY1MTA=="
   "resolved" "https://registry.npmjs.org/@scure/base/-/base-1.1.1.tgz"
@@ -1521,8 +1526,9 @@
   "resolved" "https://registry.npmjs.org/@vue/shared/-/shared-3.2.41.tgz"
   "version" "3.2.41"
 
-"@weiroll/weiroll@github:weiroll/weiroll":
-  "resolved" "git+ssh://git@github.com/weiroll/weiroll.git#afe6ba63c505bf9f2c630cd1c1dabad0de81c7e2"
+"@weiroll/weiroll@github:mickdegraaf/weiroll":
+  "resolved" "git+ssh://git@github.com/mickdegraaf/weiroll.git#1dd6f0b56b80ce8c98eb80fb13f07a99f51dc125"
+  "version" "0.69"
 
 "abbrev@1.0.x":
   "integrity" "sha512-LEyx4aLEC3x6T0UguF6YILf+ntvmOaWsVfENmIW0E9H09vKlLDGelMjjSm0jkDHALj8A8quZ/HapKNigzwge+Q=="
