@@ -10,6 +10,10 @@ contract Block {
     }
 
     function baseFee() external view returns(uint256) {
+        return block.basefee;
+    }
+
+    function gasLimit() external view returns (uint256) {
         return block.gaslimit;
     }
 
