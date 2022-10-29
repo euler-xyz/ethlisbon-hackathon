@@ -1,10 +1,15 @@
 import React, { useContext, useState } from "react";
 import { BuilderContext, useDrawer } from "react-flow-builder";
 import { Form, Button, Input, Menu, MenuProps, Divider } from "antd";
-import { SmileOutlined } from "@ant-design/icons";
+import { Contract as WeirollContract } from "@weiroll/weiroll.js";
+import { abi as MathAbi } from "../../artifacts/contracts/Libraries/MathCompare.sol/MathCompare.json";
 
 import { DownOutlined } from "@ant-design/icons";
-import { Dropdown, Space, Row, Col } from "antd";
+import { Dropdown, Space } from "antd";
+import { Contract } from "ethers";
+import { LIBRARIES_ADDRESS } from "../../constants";
+import { useWeirollPlanner } from "../../context/Weiroll.provider";
+import { Planner } from "@weiroll/weiroll.js";
 
 const items = [
   {
@@ -34,20 +39,42 @@ const items = [
 ];
 
 const MathCompareInput: React.FC = () => {
-  const { selectedNode: node } = useContext(BuilderContext) as any;
+  const { selectedNode: node, nodes } = useContext(BuilderContext) as any;
+  const planner = useWeirollPlanner();
+
+  console.log("node", node);
+  console.log("all nodes", nodes);
+  //find index of current node in nodes
+  const index = nodes.findIndex((n: any) => n.id == node.id);
+  const previousNode = nodes?.[index - 1];
+
+  console.log("previousNode", previousNode);
   const { closeDrawer: cancel, saveDrawer: save } = useDrawer();
-  const [selectedValue, setSelectedValue] = useState(node?.data?.label) as any;
+  const [selectedValue, setSelectedValue] = useState(node?.data?.key) as any;
   const [form] = Form.useForm();
 
   const handleSubmit = async () => {
     const values = await form.validateFields();
-    save({ label: selectedValue, command: "", state: values, ret: "" });
+    const MathLibrary = new Contract(LIBRARIES_ADDRESS, MathAbi);
+    const createLibrary = WeirollContract.createLibrary(MathLibrary);
+    const call = createLibrary[selectedValue];
+
+    if (previousNode?.data?.ret) {
+      const ret = planner.add(call(previousNode.data.ret, values.number));
+      const { commands, state } = planner.plan();
+      save({
+        label: selectedValue,
+        command: commands,
+        state: state,
+        values,
+        ret: ret,
+      });
+    } else {
+      console.error("No previous node");
+    }
   };
   const onClick: MenuProps["onClick"] = (data) => {
-    const item = items.find((i) => i.key == data.key);
-    setSelectedValue(item?.label);
-
-    // save({ label: item?.label, command: "", state: "", ret: "" });
+    setSelectedValue(data.key);
   };
 
   const menu = <Menu onClick={onClick} items={items} />;

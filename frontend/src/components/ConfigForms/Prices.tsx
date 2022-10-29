@@ -10,6 +10,8 @@ import { Contract as WeirollContract } from "@weiroll/weiroll.js";
 import { LIBRARIES_ADDRESS } from "../../constants";
 import { abi as PriceAbi } from "../../artifacts/contracts/Libraries/Prices.sol/Prices.json";
 import { useWeirollPlanner } from "../../context/Weiroll.provider";
+import { Planner } from "@weiroll/weiroll.js";
+
 const items = [
   {
     key: "getPrice",
@@ -22,7 +24,9 @@ const Prices: React.FC = () => {
   const { selectedNode: node } = useContext(BuilderContext) as any;
   console.log("node", node);
   const { closeDrawer: cancel, saveDrawer: save } = useDrawer();
-  const [selectedValue, setSelectedValue] = useState(node?.data?.key) as any;
+  const [selectedValue, setSelectedValue] = useState(
+    node?.data?.key || "getPrice"
+  ) as any;
   const [form] = Form.useForm();
 
   const handleSubmit = async () => {
@@ -32,9 +36,11 @@ const Prices: React.FC = () => {
 
     const call = createLibrary[selectedValue];
     const item = items.find((i) => i.key == selectedValue);
-
     if (call) {
-      const ret = planner.add(call());
+      //weth contract address
+      const ret = planner.add(
+        call("0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2")
+      );
       const { commands, state } = planner.plan();
 
       save({

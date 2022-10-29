@@ -6,12 +6,13 @@ import { Contract as WeirollContract } from "@weiroll/weiroll.js";
 import { LIBRARIES_ADDRESS } from "../../constants";
 import { useWeirollPlanner } from "../../context/Weiroll.provider";
 import { abi as PositionAbi } from "../../artifacts/contracts/Libraries/Positions.sol/Positions.json";
+import { Planner } from "@weiroll/weiroll.js";
 
 const addressPattern = /^0x[a-fA-F0-9]{40}$/;
 
 const PositionInputs: React.FC = () => {
   const { selectedNode: node, nodes } = useContext(BuilderContext) as any;
-  console.log(node, nodes);
+
   const planner = useWeirollPlanner();
   const { closeDrawer: cancel, saveDrawer: save } = useDrawer();
 
@@ -39,8 +40,6 @@ const PositionInputs: React.FC = () => {
         values,
         ret: ret,
       });
-      // }
-      // save?.(values);
     } catch (error) {
       console.log(error);
       const values = form.getFieldsValue();
