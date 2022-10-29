@@ -17,4 +17,12 @@ contract MathCompare {
     function gte(uint256 a, uint256 b) external pure returns (bool) {
         return a >= b;
     }
+
+    function eq(uint256 a, uint256 b) external pure returns (bool) {
+        return a == b;
+    }
+
+    function neq(uint256 a, uint256) external pure returns (bool) {
+        return a != b;
+    }
 }
