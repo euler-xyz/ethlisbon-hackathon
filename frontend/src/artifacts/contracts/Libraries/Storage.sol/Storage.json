@@ -1,0 +1,53 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "Storage",
+  "sourceName": "contracts/Libraries/Storage.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "slot",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "value",
+          "type": "bytes32"
+        }
+      ],
+      "name": "readStorage",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "slot",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "value",
+          "type": "bytes32"
+        }
+      ],
+      "name": "writeStorage",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060988061001f6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c80633818ca9d146037578063b65ad197146048575b600080fd5b60466042366004606a565b9055565b005b60586053366004606a565b505490565b60405190815260200160405180910390f35b60008060408385031215607c57600080fd5b5050803592602090910135915056fea164736f6c6343000811000a",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c80633818ca9d146037578063b65ad197146048575b600080fd5b60466042366004606a565b9055565b005b60586053366004606a565b505490565b60405190815260200160405180910390f35b60008060408385031215607c57600080fd5b5050803592602090910135915056fea164736f6c6343000811000a",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

@@ -1,13 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BuilderContext, useDrawer } from "react-flow-builder";
 import { Form, Button, Input, Menu, MenuProps, Divider } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
-import { abi as BlockABI } from "../../../../contracts/artifacts/contracts/Libraries/Block.sol/Block.json";
+import { abi as BlockABI } from "../../artifacts/contracts/Libraries/Block.sol/Block.json";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Row, Col } from "antd";
 import { useWeirollPlanner } from "../../context/Weiroll.provider";
 import { Contract } from "ethers";
-
+import { LIBRARIES_ADDRESS } from "../../constants";
+import { useProvider } from "wagmi";
 const items = [
   {
     key: "timestamp",
@@ -30,9 +31,9 @@ const items = [
     label: "Number",
   },
 ];
-// const BlockContract = new Contract()
 const BlockInput: React.FC = () => {
   const planner = useWeirollPlanner();
+  const provder = useProvider();
   const { selectedNode: node } = useContext(BuilderContext) as any;
   console.log("node", node);
   const { closeDrawer: cancel, saveDrawer: save } = useDrawer();
@@ -41,6 +42,11 @@ const BlockInput: React.FC = () => {
 
   const handleSubmit = async () => {
     const values = await form.validateFields();
+
+    const BlockLibrary = new Contract(LIBRARIES_ADDRESS, BlockABI, provder);
+
+    planner.add(BlockLibrary[selectedValue]?.());
+
     save({ label: selectedValue, command: "", state: values, ret: "" });
   };
 

@@ -1,0 +1,37 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "Tx",
+  "sourceName": "contracts/Libraries/Tx.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "gasPrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "origin",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b5060648061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c8063938b5f32146037578063fe173b9714604a575b600080fd5b6040513281526020015b60405180910390f35b6040513a8152602001604156fea164736f6c6343000811000a",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c8063938b5f32146037578063fe173b9714604a575b600080fd5b6040513281526020015b60405180910390f35b6040513a8152602001604156fea164736f6c6343000811000a",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

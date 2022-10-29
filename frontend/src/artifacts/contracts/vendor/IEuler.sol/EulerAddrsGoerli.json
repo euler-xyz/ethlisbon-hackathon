@@ -1,0 +1,63 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "EulerAddrsGoerli",
+  "sourceName": "contracts/vendor/IEuler.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "euler",
+      "outputs": [
+        {
+          "internalType": "contract IEuler",
+          "name": "",
+          "type": "IEuler"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "exec",
+      "outputs": [
+        {
+          "internalType": "contract IEulerExec",
+          "name": "",
+          "type": "IEulerExec"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "liquidation",
+      "outputs": [
+        {
+          "internalType": "contract IEulerLiquidation",
+          "name": "",
+          "type": "IEulerLiquidation"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "markets",
+      "outputs": [
+        {
+          "internalType": "contract IEulerMarkets",
+          "name": "",
+          "type": "IEulerMarkets"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x60f4610039600b82828239805160001a60731461002c57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe730000000000000000000000000000000000000000301460806040526004361060515760003560e01c80633ac2a032146056578063c1c0e9c4146099578063db661b711460b3578063f2dfbf661460cd575b600080fd5b6070733ebc39b84b1f856fafe9803a9e1eae7da016da3681565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f35b6070734b62eb6797526491eef6ef36d3b9960e5d66c39481565b607073931172bb95549d0f29e10ae2d079aba3c63318b381565b60707366326c072283fee63e1c3fef9bd024f8697ec1bb8156fea164736f6c6343000811000a",
+  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040526004361060515760003560e01c80633ac2a032146056578063c1c0e9c4146099578063db661b711460b3578063f2dfbf661460cd575b600080fd5b6070733ebc39b84b1f856fafe9803a9e1eae7da016da3681565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f35b6070734b62eb6797526491eef6ef36d3b9960e5d66c39481565b607073931172bb95549d0f29e10ae2d079aba3c63318b381565b60707366326c072283fee63e1c3fef9bd024f8697ec1bb8156fea164736f6c6343000811000a",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
