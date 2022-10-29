@@ -4,7 +4,10 @@ import FlowBuilder, {
   NodeContext,
   INode,
   IRegisterNode,
+  IConfigComponent,
+  useDrawer,
 } from "react-flow-builder";
+import ConfigForm from "./components/ConfigForm";
 
 import "./flowBuilder.css";
 
@@ -16,6 +19,11 @@ const StartNodeDisplay: React.FC = () => {
 const EndNodeDisplay: React.FC = () => {
   const node = useContext(NodeContext);
   return <div className="end-node">{node.name}</div>;
+};
+
+const ConfigComponent: React.FC = () => {
+  const node = useContext(NodeContext);
+  return <div className="config-node">{node.name}</div>;
 };
 
 const OtherNodeDisplay: React.FC = () => {
@@ -31,30 +39,26 @@ const ConditionNodeDisplay: React.FC = () => {
 const registerNodes: IRegisterNode[] = [
   {
     type: "start",
-    name: "start node",
+    name: "start",
     displayComponent: StartNodeDisplay,
     isStart: true,
   },
   {
     type: "end",
-    name: "end node",
+    name: "execute",
     displayComponent: EndNodeDisplay,
     isEnd: true,
   },
   {
-    type: "node",
-    name: "other node",
-    displayComponent: OtherNodeDisplay,
-  },
-  {
-    type: "condition",
-    name: "condition node",
+    type: "node read",
+    name: "read",
     displayComponent: ConditionNodeDisplay,
+    configComponent: ConfigForm,
   },
   {
-    type: "branch",
-    name: "branch node",
-    conditionNodeType: "condition",
+    type: "node write",
+    name: "write",
+    displayComponent: OtherNodeDisplay,
   },
 ];
 
@@ -71,6 +75,7 @@ const Demo = () => {
       nodes={nodes}
       onChange={handleChange}
       registerNodes={registerNodes}
+      drawerVisibleWhenAddNode={true}
     />
   );
 };
