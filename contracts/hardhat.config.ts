@@ -6,6 +6,7 @@ import { resolve } from "path";
 
 import "./tasks/accounts";
 import "./tasks/deploy";
+import "./tasks/orders";
 
 const dotenvConfigPath: string = process.env.DOTENV_CONFIG_PATH || "./.env";
 dotenvConfig({ path: resolve(__dirname, dotenvConfigPath) });
@@ -26,11 +27,12 @@ const chainIds = {
   avalanche: 43114,
   bsc: 56,
   goerli: 5,
-  hardhat: 31337,
+  hardhat: 1,
   mainnet: 1,
   "optimism-mainnet": 10,
   "polygon-mainnet": 137,
   "polygon-mumbai": 80001,
+  tenderly: 1
 };
 
 function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {
@@ -42,6 +44,8 @@ function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {
     case "bsc":
       jsonRpcUrl = "https://bsc-dataseed1.binance.org";
       break;
+    case "tenderly":
+      jsonRpcUrl = "https://rpc.tenderly.co/fork/106a7de5-8f9f-4db4-9458-033b3b42ec78";
     default:
       jsonRpcUrl = "https://" + chain + ".infura.io/v3/" + infuraApiKey;
   }
@@ -89,6 +93,10 @@ const config: HardhatUserConfig = {
     goerli: getChainConfig("goerli"),
     mainnet: getChainConfig("mainnet"),
     optimism: getChainConfig("optimism-mainnet"),
+    tenderly: {
+      url: "https://rpc.tenderly.co/fork/106a7de5-8f9f-4db4-9458-033b3b42ec78",
+      chainId: 1,
+    },
     "polygon-mainnet": getChainConfig("polygon-mainnet"),
     "polygon-mumbai": getChainConfig("polygon-mumbai"),
   },
