@@ -22,7 +22,7 @@ contract MathCompare {
         return a == b;
     }
 
-    function neq(uint256 a, uint256) external pure returns (bool) {
+    function neq(uint256 a, uint256 b) external pure returns (bool) {
         return a != b;
     }
 }
