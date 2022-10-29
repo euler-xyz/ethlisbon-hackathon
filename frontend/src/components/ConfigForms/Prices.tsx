@@ -8,32 +8,12 @@ import { Dropdown, Space, Row, Col } from "antd";
 
 const items = [
   {
-    key: "lt",
-    label: "Less then",
-  },
-  {
-    key: "lte",
-    label: "Less then equal",
-  },
-  {
-    key: "gt",
-    label: "Greater then",
-  },
-  {
-    key: "gte",
-    label: "Greater then equal",
-  },
-  {
-    key: "eq",
-    label: "Equal",
-  },
-  {
-    key: "eq",
-    label: "Not equal",
+    key: "getPrice",
+    label: "Get ETH Price",
   },
 ];
 
-const MathCompareInput: React.FC = () => {
+const Prices: React.FC = () => {
   const { selectedNode: node } = useContext(BuilderContext) as any;
   console.log("node", node);
   const { closeDrawer: cancel, saveDrawer: save } = useDrawer();
@@ -56,27 +36,14 @@ const MathCompareInput: React.FC = () => {
 
   return (
     <div>
-      <Form
-        style={{ gap: "10px", display: "flex", alignItems: "center" }}
-        form={form}
-        initialValues={node.data || { name: node.name }}
-      >
-        <Dropdown overlay={menu}>
-          <a onClick={(e) => e.preventDefault()}>
-            <Space>
-              {selectedValue || "Select Value"}
-              <DownOutlined />
-            </Space>
-          </a>
-        </Dropdown>
-        <Form.Item
-          style={{ marginBottom: "0px" }}
-          name="number"
-          rules={[{ required: true }]}
-        >
-          <Input />
-        </Form.Item>
-      </Form>
+      <Dropdown overlay={menu}>
+        <a onClick={(e) => e.preventDefault()}>
+          <Space>
+            {selectedValue || "Select Value"}
+            <DownOutlined />
+          </Space>
+        </a>
+      </Dropdown>
       <Divider />
       <div>
         <Button onClick={cancel}>Cancel</Button>
@@ -88,4 +55,4 @@ const MathCompareInput: React.FC = () => {
   );
 };
 
-export default MathCompareInput;
+export default Prices;

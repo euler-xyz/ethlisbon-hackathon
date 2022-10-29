@@ -12,6 +12,7 @@ import BlockInput from "../ConfigForms/BlockActionSelect";
 import SimpleInput from "../ConfigForms/BlockActionSelect";
 import MathCompareInput from "../ConfigForms/MathCompareInput";
 import PositionInputs from "../ConfigForms/PositionInputs";
+import Prices from "../ConfigForms/Prices";
 
 import "./index.css";
 
@@ -87,6 +88,12 @@ const registerNodes: IRegisterNode[] = [
     name: "Position",
     displayComponent: OtherNodeDisplay,
     configComponent: PositionInputs,
+  },
+  {
+    type: "getPrice",
+    name: "Get Price",
+    displayComponent: MathNodeDisplay,
+    configComponent: Prices,
   },
   // {
   //   type: "Revert",
