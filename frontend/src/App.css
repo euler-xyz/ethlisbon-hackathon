@@ -55,3 +55,8 @@
     max-width: 250px;
   }
 }
+
+.connection-section {
+  padding: 10px;
+  background: #fcfcfc;
+}

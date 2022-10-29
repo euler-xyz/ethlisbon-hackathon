@@ -4,19 +4,25 @@ import "./index.css";
 import "./App.css";
 
 import Flow from "./Flow";
+import FlowBuilder from "./FlowBuilder";
 import { ConnectButton, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiConfig } from "wagmi";
-import { chains, wagmiClient } from "./provider";
+import { wagmiClient, chains } from "./provider";
 
 function App() {
   return (
     <>
-      <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider chains={chains}>
-          <ConnectButton />
-        </RainbowKitProvider>
-      </WagmiConfig>
-      <Flow />
+      <div className="connection-section">
+        <WagmiConfig client={wagmiClient}>
+          <RainbowKitProvider chains={chains}>
+            <ConnectButton />
+          </RainbowKitProvider>
+        </WagmiConfig>
+      </div>
+
+      <div className="flow-section">
+        <FlowBuilder />
+      </div>
     </>
   );
 }
