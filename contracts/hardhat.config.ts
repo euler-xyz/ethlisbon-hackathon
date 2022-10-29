@@ -6,7 +6,7 @@ import { resolve } from "path";
 
 import * as tdly from "@tenderly/hardhat-tenderly";
 tdly.setup({
-  automaticVerifications: false
+  automaticVerifications: true
 });
 
 import "./tasks/accounts";
@@ -14,6 +14,9 @@ import "./tasks/deploy";
 import "./tasks/orders";
 import "./tasks/keeper";
 import "./tasks/debug";
+import "./tasks/deployWeirollModule";
+import "./tasks/prepareSafe";
+import "./tasks/addDummyScript";
 
 const dotenvConfigPath: string = process.env.DOTENV_CONFIG_PATH || "./.env";
 dotenvConfig({ path: resolve(__dirname, dotenvConfigPath) });
@@ -36,6 +39,8 @@ const chainIds = {
   goerli: 5,
   hardhat: 1,
   mainnet: 1,
+  ethlisbon: 1,
+  tenderly: 1,
   "optimism-mainnet": 10,
   "polygon-mainnet": 137,
   "polygon-mumbai": 80001,
@@ -51,8 +56,12 @@ function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {
     case "bsc":
       jsonRpcUrl = "https://bsc-dataseed1.binance.org";
       break;
-    case "tenderly":
+    case "ethlisbon":
       jsonRpcUrl = "https://rpc.tenderly.co/fork/106a7de5-8f9f-4db4-9458-033b3b42ec78";
+      break;
+    case "tenderly":
+      jsonRpcUrl = "https://rpc.tenderly.co/fork/7a515420-8d86-4d02-8db7-1d1ddbf7790e";
+      break;
     default:
       jsonRpcUrl = "https://" + chain + ".infura.io/v3/" + infuraApiKey;
   }
@@ -106,6 +115,8 @@ const config: HardhatUserConfig = {
     },
     "polygon-mainnet": getChainConfig("polygon-mainnet"),
     "polygon-mumbai": getChainConfig("polygon-mumbai"),
+    ethlisbon: getChainConfig("ethlisbon"),
+    tenderly: getChainConfig("tenderly"),
   },
   paths: {
     artifacts: "./artifacts",
