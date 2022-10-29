@@ -9,9 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@rainbow-me/rainbowkit": "^0.7.4",
+    "ethers": "^5.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "reactflow": "^11.1.2"
+    "reactflow": "^11.1.2",
+    "wagmi": "^0.7.8"
   },
   "devDependencies": {
     "@types/react": "^18.0.22",

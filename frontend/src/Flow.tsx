@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from "react";
 import ReactFlow, {
   ReactFlowProvider,
   addEdge,
@@ -7,17 +7,17 @@ import ReactFlow, {
   Controls,
   Connection,
   Edge,
-} from 'reactflow';
-import 'reactflow/dist/style.css';
-
-import Sidebar from './Sidebar';
+} from "reactflow";
+import "reactflow/dist/style.css";
+// import "./index.css"
+import Sidebar from "./Sidebar";
 import "./App.css";
 
 const initialNodes = [
   {
-    id: '1',
-    type: 'input',
-    data: { label: 'input node' },
+    id: "1",
+    type: "input",
+    data: { label: "input node" },
     position: { x: 250, y: 5 },
   },
 ];
@@ -26,27 +26,41 @@ let id = 0;
 const getId = () => `dndnode_${id++}`;
 
 const DnDFlow = () => {
-  const reactFlowWrapper = useRef(null);
+  const reactFlowWrapper = useRef(null) as any;
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const [reactFlowInstance, setReactFlowInstance] = useState(null);
+  const [reactFlowInstance, setReactFlowInstance] = useState(null) as any;
 
-  const onConnect = useCallback((params: Edge<any> | Connection) => setEdges((eds) => addEdge(params, eds)), []);
+  const onConnect = useCallback(
+    (params: Edge<any> | Connection) => setEdges((eds) => addEdge(params, eds)),
+    []
+  );
 
-  const onDragOver = useCallback((event: { preventDefault: () => void; dataTransfer: { dropEffect: string; }; }) => {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
-  }, []);
+  const onDragOver = useCallback(
+    (event: {
+      preventDefault: () => void;
+      dataTransfer: { dropEffect: string };
+    }) => {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "move";
+    },
+    []
+  );
 
   const onDrop = useCallback(
-    (event: { preventDefault: () => void; dataTransfer: { getData: (arg0: string) => any; }; clientX: number; clientY: number; }) => {
+    (event: {
+      preventDefault: () => void;
+      dataTransfer: { getData: (arg0: string) => any };
+      clientX: number;
+      clientY: number;
+    }) => {
       event.preventDefault();
 
-      const reactFlowBounds = reactFlowWrapper?.current?.getBoundingClientRect();
-      const type = event.dataTransfer.getData('application/reactflow');
+      const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
+      const type = event.dataTransfer.getData("application/reactflow");
 
       // check if the dropped element is valid
-      if (typeof type === 'undefined' || !type) {
+      if (typeof type === "undefined" || !type) {
         return;
       }
 
