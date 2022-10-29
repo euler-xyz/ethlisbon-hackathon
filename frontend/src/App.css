@@ -59,4 +59,9 @@
 .connection-section {
   padding: 10px;
   background: rgb(247, 247, 247);
+  min-height: 250px;
+}
+
+.flow-builder-wrap {
+  min-height: 400px;
 }

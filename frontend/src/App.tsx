@@ -2,6 +2,7 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./index.css";
 import "./App.css";
+import "antd/dist/antd.css";
 
 import FlowBuilder from "./components/FlowBuilder";
 import { ConnectButton, RainbowKitProvider } from "@rainbow-me/rainbowkit";
@@ -15,12 +16,9 @@ function App() {
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
             <ConnectButton />
+            <FlowBuilder />
           </RainbowKitProvider>
         </WagmiConfig>
-      </div>
-
-      <div className="flow-section">
-        <FlowBuilder />
       </div>
     </>
   );

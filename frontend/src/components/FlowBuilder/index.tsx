@@ -7,7 +7,9 @@ import FlowBuilder, {
   IConfigComponent,
   useDrawer,
 } from "react-flow-builder";
-import ConfigForm from "../ConfigForm";
+import ConfigForm from "../ConfigForms";
+import BlockInput from "../ConfigForms/BlockActionSelect";
+import SimpleInput from "../ConfigForms/BlockActionSelect";
 
 import "./index.css";
 
@@ -33,7 +35,8 @@ const OtherNodeDisplay: React.FC = () => {
 
 const ConditionNodeDisplay: React.FC = () => {
   const node = useContext(NodeContext);
-  return <div className="condition-node">{node.name}</div>;
+  console.log("node state", node);
+  return <div className="condition-node">{`${node.name} → ${node?.data?.label}`}</div>;
 };
 
 const registerNodes: IRegisterNode[] = [
@@ -44,21 +47,40 @@ const registerNodes: IRegisterNode[] = [
     isStart: true,
   },
   {
-    type: "end",
-    name: "execute",
-    displayComponent: EndNodeDisplay,
-    isEnd: true,
+    type: "block",
+    name: "Block",
+    displayComponent: ConditionNodeDisplay,
+    configComponent: BlockInput,
   },
   {
-    type: "node read",
-    name: "read",
+    type: "MathCompare",
+    name: "Math Compare",
     displayComponent: ConditionNodeDisplay,
     configComponent: ConfigForm,
   },
   {
-    type: "node write",
-    name: "write",
+    type: "Position",
+    name: "Position",
     displayComponent: OtherNodeDisplay,
+    configComponent: ConfigForm,
+  },
+  {
+    type: "Revert",
+    name: "Revert",
+    displayComponent: OtherNodeDisplay,
+    configComponent: ConfigForm,
+  },
+  {
+    type: "Tx",
+    name: "Tx",
+    displayComponent: OtherNodeDisplay,
+    configComponent: ConfigForm,
+  },
+  {
+    type: "end",
+    name: "execute",
+    displayComponent: EndNodeDisplay,
+    isEnd: true,
   },
 ];
 
