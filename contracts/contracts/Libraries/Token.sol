@@ -9,6 +9,6 @@ contract Token {
     }
 
     function transferETHToMsgSender(uint256 amount) external {
-        msg.sender.transfer(amount);
+        payable(msg.sender).transfer(amount);
     }
 }
