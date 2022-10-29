@@ -2,9 +2,11 @@ import React, { useContext, useState } from "react";
 import { BuilderContext, useDrawer } from "react-flow-builder";
 import { Form, Button, Input, Menu, MenuProps, Divider } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
-
+import { abi as BlockABI } from "../../../../contracts/artifacts/contracts/Libraries/Block.sol/Block.json";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Row, Col } from "antd";
+import { useWeirollPlanner } from "../../context/Weiroll.provider";
+import { Contract } from "ethers";
 
 const items = [
   {
@@ -28,8 +30,9 @@ const items = [
     label: "Number",
   },
 ];
-
+// const BlockContract = new Contract()
 const BlockInput: React.FC = () => {
+  const planner = useWeirollPlanner();
   const { selectedNode: node } = useContext(BuilderContext) as any;
   console.log("node", node);
   const { closeDrawer: cancel, saveDrawer: save } = useDrawer();
@@ -40,6 +43,7 @@ const BlockInput: React.FC = () => {
     const values = await form.validateFields();
     save({ label: selectedValue, command: "", state: values, ret: "" });
   };
+
   const onClick: MenuProps["onClick"] = (data) => {
     console.log(data);
     const item = items.find((i) => i.key == data.key);

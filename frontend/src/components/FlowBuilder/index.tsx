@@ -7,6 +7,7 @@ import FlowBuilder, {
   IConfigComponent,
   useDrawer,
 } from "react-flow-builder";
+import { WeirollProvider } from "../../context/Weiroll.provider";
 import ConfigForm from "../ConfigForms";
 import BlockInput from "../ConfigForms/BlockActionSelect";
 import SimpleInput from "../ConfigForms/BlockActionSelect";
@@ -124,12 +125,14 @@ const Demo = () => {
   };
 
   return (
-    <FlowBuilder
-      nodes={nodes}
-      onChange={handleChange}
-      registerNodes={registerNodes}
-      drawerVisibleWhenAddNode={true}
-    />
+    <WeirollProvider>
+      <FlowBuilder
+        nodes={nodes}
+        onChange={handleChange}
+        registerNodes={registerNodes}
+        drawerVisibleWhenAddNode={true}
+      />
+    </WeirollProvider>
   );
 };
 
