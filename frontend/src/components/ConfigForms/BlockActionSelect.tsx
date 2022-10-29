@@ -14,14 +14,7 @@ const BlockInput: React.FC = () => {
   const [form] = Form.useForm();
 
   const handleSubmit = async () => {
-    try {
-      const values = await form.validateFields();
-      // maybe save the call
-      save?.(values);
-    } catch (error) {
-      const values = form.getFieldsValue();
-      save?.(values, !!error);
-    }
+    save({ label: selectedValue, command: "", state: "", ret: "" });
   };
   const onClick: MenuProps["onClick"] = (data) => {
     setSelectedValue(data.key);
