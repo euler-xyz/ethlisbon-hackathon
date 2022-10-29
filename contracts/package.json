@@ -92,6 +92,7 @@
     "typechain": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat typechain"
   },
   "dependencies": {
+    "cross-fetch": "^3.1.5",
     "@eulerxyz/euler-interfaces": "github:euler-xyz/euler-interfaces",
     "@eulerxyz/euler-sdk": "^0.2.5",
     "@gnosis.pm/safe-contracts": "^1.3.0",
