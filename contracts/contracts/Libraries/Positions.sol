@@ -5,7 +5,7 @@ pragma solidity ^0.8.4;
 
 contract Positions {
     function closePosition(address underlying, address collateral, uint24 fee) external {
-        SwapUniExactOutputParams memory params;
+        IEulerSwap.SwapUniExactOutputParams memory params;
 
         params.subAccountIdIn = 0;
         params.subAccountIdOut = 0;
