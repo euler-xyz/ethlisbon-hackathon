@@ -3,8 +3,7 @@ import reactLogo from "./assets/react.svg";
 import "./index.css";
 import "./App.css";
 
-import Flow from "./Flow";
-import FlowBuilder from "./FlowBuilder";
+import FlowBuilder from "./components/FlowBuilder";
 import { ConnectButton, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiConfig } from "wagmi";
 import { wagmiClient, chains } from "./provider";

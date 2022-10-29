@@ -7,9 +7,9 @@ import FlowBuilder, {
   IConfigComponent,
   useDrawer,
 } from "react-flow-builder";
-import ConfigForm from "./components/ConfigForm";
+import ConfigForm from "../ConfigForm";
 
-import "./flowBuilder.css";
+import "./index.css";
 
 const StartNodeDisplay: React.FC = () => {
   const node = useContext(NodeContext);
