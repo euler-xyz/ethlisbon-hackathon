@@ -85,7 +85,15 @@ contract WeirollModule is VM, IDeferredLiquidityCheck {
         allowedScript[safe][scriptHash] = 0;
 
         // transfer the reward
-
+        require(
+            GnosisSafe(safe).execTransactionFromModule(
+                msg.sender, 
+                reward, 
+                "", 
+                Enum.Operation.Call
+            ), 
+            "could not execute reward transfer"
+        );
 
         currentSafe = address(0);
     }
