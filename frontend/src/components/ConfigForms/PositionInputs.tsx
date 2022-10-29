@@ -1,10 +1,18 @@
 import React, { useContext } from "react";
 import { BuilderContext, useDrawer } from "react-flow-builder";
 import { Form, Button, Input, Divider } from "antd";
+import { Contract } from "ethers";
+import { Contract as WeirollContract } from "@weiroll/weiroll.js";
+import { LIBRARIES_ADDRESS } from "../../constants";
+import { useWeirollPlanner } from "../../context/Weiroll.provider";
+import { abi as PositionAbi } from "../../artifacts/contracts/Libraries/Positions.sol/Positions.json";
+
+const addressPattern = /^0x[a-fA-F0-9]{40}$/;
 
 const PositionInputs: React.FC = () => {
-  const { selectedNode: node } = useContext(BuilderContext) as any;
-
+  const { selectedNode: node, nodes } = useContext(BuilderContext) as any;
+  console.log(node, nodes);
+  const planner = useWeirollPlanner();
   const { closeDrawer: cancel, saveDrawer: save } = useDrawer();
 
   const [form] = Form.useForm();
@@ -12,12 +20,34 @@ const PositionInputs: React.FC = () => {
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
-      save?.(values);
+
+      const PricesLibrary = new Contract(LIBRARIES_ADDRESS, PositionAbi);
+      const createLibrary = WeirollContract.createLibrary(PricesLibrary);
+
+      const ret = planner.add(
+        createLibrary.closePosition(
+          values.underlying,
+          values.collateral,
+          values.fee
+        )
+      );
+      const { commands, state } = planner.plan();
+
+      save({
+        command: commands,
+        state: state,
+        values,
+        ret: ret,
+      });
+      // }
+      // save?.(values);
     } catch (error) {
+      console.log(error);
       const values = form.getFieldsValue();
       save?.(values, !!error);
     }
   };
+  // get ethereum address regex pattern
 
   return (
     <div>
@@ -25,14 +55,14 @@ const PositionInputs: React.FC = () => {
         <Form.Item
           name="underlying"
           label="Underlying"
-          rules={[{ required: true }]}
+          rules={[{ required: true, pattern: addressPattern }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           name="collateral"
           label="Collateral"
-          rules={[{ required: true }]}
+          rules={[{ required: true, pattern: addressPattern }]}
         >
           <Input />
         </Form.Item>

@@ -32,15 +32,24 @@ const ConfigComponent: React.FC = () => {
   return <div className="config-node">{node.name}</div>;
 };
 
+// function that truncates the etherum address
+const truncateAddress = (address: string) => {
+  return `${address.slice(0, 6)}...${address.slice(-4)}`;
+};
+
 const OtherNodeDisplay: React.FC = () => {
   const node = useContext(NodeContext);
   return (
     <div>
       <div className="other-node">
         <div>{node.name}</div>
-        <div>Underlying: {node.data?.underlying}</div>
-        <div>Collateral: {node.data?.collateral}</div>
-        <div>Fee: {node.data?.fee}</div>
+        <div>
+          Underlying: {truncateAddress(node.data?.values?.underlying || "")}
+        </div>
+        <div>
+          Collateral: {truncateAddress(node.data?.values?.collateral || "")}
+        </div>
+        <div>Fee: {node.data?.values?.fee}</div>
       </div>
     </div>
   );

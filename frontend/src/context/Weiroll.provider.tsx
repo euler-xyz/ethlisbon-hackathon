@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import weiroll from "@weiroll/weiroll.js";
+import { Planner } from "@weiroll/weiroll.js";
 interface Props {
   children: React.ReactNode;
 }
@@ -18,12 +18,12 @@ const WeirollProvider: React.FC<Props> = ({ children }) => {
   const [weirollPlanner, setWeirollPlanner] = useState() as any;
 
   useEffect(() => {
-    const planner = new weiroll.Planner();
+    const planner = new Planner();
     if (!weirollPlanner) setWeirollPlanner(planner);
   }, []);
 
   return (
-    <WeirollContext.Provider value={weiroll}>
+    <WeirollContext.Provider value={weirollPlanner}>
       {children}
     </WeirollContext.Provider>
   );

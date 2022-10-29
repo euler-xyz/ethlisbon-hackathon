@@ -35,7 +35,6 @@ const items = [
 
 const MathCompareInput: React.FC = () => {
   const { selectedNode: node } = useContext(BuilderContext) as any;
-  console.log("node", node);
   const { closeDrawer: cancel, saveDrawer: save } = useDrawer();
   const [selectedValue, setSelectedValue] = useState(node?.data?.label) as any;
   const [form] = Form.useForm();
@@ -45,10 +44,9 @@ const MathCompareInput: React.FC = () => {
     save({ label: selectedValue, command: "", state: values, ret: "" });
   };
   const onClick: MenuProps["onClick"] = (data) => {
-    console.log(data);
     const item = items.find((i) => i.key == data.key);
     setSelectedValue(item?.label);
-    console.log(item);
+
     // save({ label: item?.label, command: "", state: "", ret: "" });
   };
 
