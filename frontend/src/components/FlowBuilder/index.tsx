@@ -23,16 +23,22 @@ import EthersAdapter from "@gnosis.pm/safe-ethers-lib";
 import "./index.css";
 import { ethers } from "ethers";
 import { SAFE_ADDRESS, WEIROLL_ADDRESS } from "../../constants";
-import { etherscanBlockExplorers, useProvider, useSigner } from "wagmi";
+import {
+  etherscanBlockExplorers,
+  useContract,
+  useProvider,
+  useSigner,
+} from "wagmi";
 
 const StartNodeDisplay: React.FC = () => {
   const node = useContext(NodeContext);
   return <div className="start-node">{node.name}</div>;
 };
 
-const handleExecute = async (nodes: any) => {
+const handleExecute = async (nodes: any, signer: any) => {
+  console.log(signer);
   // const signer = useSigner();
-  const signer = useSigner() as any;
+  // const signer = useSigner() as any;
   // const ethProvider = new ethers.providers.Web3Provider(provider as any);
   // create a plan
   const planner = new Planner();
@@ -53,7 +59,8 @@ const handleExecute = async (nodes: any) => {
   const { commands, state } = planner.plan();
 
   const reward = ethers.utils.parseEther("0.001");
-  const weirollModule = new ethers.Contract(WEIROLL_ADDRESS, abi);
+
+  const weirollModule = new ethers.Contract(WEIROLL_ADDRESS, abi, signer);
 
   const safeTransactionData = {
     to: WEIROLL_ADDRESS,
@@ -93,10 +100,14 @@ const handleExecute = async (nodes: any) => {
 };
 
 const EndNodeDisplay: React.FC = () => {
+  const { data: signer } = useSigner();
+
   const node = useContext(NodeContext);
   const { nodes } = useContext(BuilderContext) as any;
 
-  return <Button onClick={(val) => handleExecute(nodes)}>{node.name}</Button>;
+  return (
+    <Button onClick={(val) => handleExecute(nodes, signer)}>{node.name}</Button>
+  );
 };
 
 const ConfigComponent: React.FC = () => {
