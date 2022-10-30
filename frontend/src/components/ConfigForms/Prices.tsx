@@ -35,21 +35,12 @@ const Prices: React.FC = () => {
     const createLibrary = WeirollContract.createLibrary(PricesLibrary);
 
     const call = createLibrary[selectedValue];
-    const item = items.find((i) => i.key == selectedValue);
     if (call) {
-      //weth contract address
-      const ret = planner.add(
-        call("0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2")
-      );
-      const { commands, state } = planner.plan();
-
       save({
-        label: selectedValue,
-        key: item?.key,
-        command: commands,
-        state: state,
+        call: (prevValue: any) =>
+          call("0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"),
+        dependsOnPrev: false,
         values,
-        ret: ret,
       });
     }
   };

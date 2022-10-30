@@ -33,14 +33,13 @@ const items = [
     label: "Equal",
   },
   {
-    key: "eq",
+    key: "neq",
     label: "Not equal",
   },
 ];
 
 const MathCompareInput: React.FC = () => {
   const { selectedNode: node, nodes } = useContext(BuilderContext) as any;
-  const planner = useWeirollPlanner();
 
   console.log("node", node);
   console.log("all nodes", nodes);
@@ -52,27 +51,26 @@ const MathCompareInput: React.FC = () => {
   const { closeDrawer: cancel, saveDrawer: save } = useDrawer();
   const [selectedValue, setSelectedValue] = useState(node?.data?.key) as any;
   const [form] = Form.useForm();
+  const item = items.find((i) => i.key == selectedValue);
 
   const handleSubmit = async () => {
     const values = await form.validateFields();
     const MathLibrary = new Contract(LIBRARIES_ADDRESS, MathAbi);
     const createLibrary = WeirollContract.createLibrary(MathLibrary);
-    const call = createLibrary[selectedValue];
-
-    if (previousNode?.data?.ret) {
-      const ret = planner.add(call(previousNode.data.ret, values.number));
-      const { commands, state } = planner.plan();
+    const libCall = createLibrary[selectedValue];
+    console.log("previousNode.data");
+    if (previousNode?.data?.call && libCall) {
       save({
-        label: selectedValue,
-        command: commands,
-        state: state,
-        values,
-        ret: ret,
+        call: (prevValue: any) => libCall(prevValue, values.number),
+        dependsOnPrev: true,
+        values: values,
+        label: item?.label,
       });
     } else {
       console.error("No previous node");
     }
   };
+
   const onClick: MenuProps["onClick"] = (data) => {
     setSelectedValue(data.key);
   };
@@ -89,7 +87,7 @@ const MathCompareInput: React.FC = () => {
         <Dropdown overlay={menu}>
           <a onClick={(e) => e.preventDefault()}>
             <Space>
-              {selectedValue || "Select Value"}
+              {item?.label || "Select Value"}
               <DownOutlined />
             </Space>
           </a>

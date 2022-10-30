@@ -11,9 +11,9 @@ import { Planner } from "@weiroll/weiroll.js";
 const addressPattern = /^0x[a-fA-F0-9]{40}$/;
 
 const PositionInputs: React.FC = () => {
-  const { selectedNode: node, nodes } = useContext(BuilderContext) as any;
-
+  const { selectedNode: node } = useContext(BuilderContext) as any;
   const planner = useWeirollPlanner();
+  console.log("planner", planner.state);
   const { closeDrawer: cancel, saveDrawer: save } = useDrawer();
 
   const [form] = Form.useForm();
@@ -25,20 +25,15 @@ const PositionInputs: React.FC = () => {
       const PricesLibrary = new Contract(LIBRARIES_ADDRESS, PositionAbi);
       const createLibrary = WeirollContract.createLibrary(PricesLibrary);
 
-      const ret = planner.add(
-        createLibrary.closePosition(
-          values.underlying,
-          values.collateral,
-          values.fee
-        )
-      );
-      const { commands, state } = planner.plan();
-
       save({
-        command: commands,
-        state: state,
+        call: (prevValue: any) =>
+          createLibrary.closePosition(
+            values.underlying,
+            values.collateral,
+            values.fee
+          ),
+        dependsOnPrev: false,
         values,
-        ret: ret,
       });
     } catch (error) {
       console.log(error);

@@ -1,4 +1,5 @@
 // index.tsx
+import { Button } from "antd";
 import React, { useState, useContext } from "react";
 import FlowBuilder, {
   NodeContext,
@@ -6,6 +7,7 @@ import FlowBuilder, {
   IRegisterNode,
   IConfigComponent,
   useDrawer,
+  BuilderContext,
 } from "react-flow-builder";
 import { WeirollProvider } from "../../context/Weiroll.provider";
 import ConfigForm from "../ConfigForms";
@@ -14,6 +16,7 @@ import SimpleInput from "../ConfigForms/BlockActionSelect";
 import MathCompareInput from "../ConfigForms/MathCompareInput";
 import PositionInputs from "../ConfigForms/PositionInputs";
 import Prices from "../ConfigForms/Prices";
+import { Planner } from "@weiroll/weiroll.js";
 
 import "./index.css";
 
@@ -22,14 +25,39 @@ const StartNodeDisplay: React.FC = () => {
   return <div className="start-node">{node.name}</div>;
 };
 
+const handleExecute = () => {};
+
 const EndNodeDisplay: React.FC = () => {
   const node = useContext(NodeContext);
-  return <div className="end-node">{node.name}</div>;
+  const { nodes } = useContext(BuilderContext) as any;
+  // create a plan
+  const planner = new Planner();
+  let lastReturn: any;
+  // remove first and last element of nodes
+  nodes.slice(1, -1).forEach((node: any) => {
+    console.log(node);
+    const { data } = node;
+    if (data?.value || data?.values) {
+      console.log(lastReturn);
+      if (node?.data?.dependsOnPrev) {
+        lastReturn = planner.add(node.data.call?.(lastReturn));
+      } else {
+        lastReturn = planner.add(node.data.call?.());
+      }
+    }
+  });
+  // nodes.forEach((node: any) => {
+  //   console.log(node);
+  // });
+  console.log(planner);
+  const plan = planner.plan();
+  console.log(plan);
+  return <Button onClick={(val) => console.log(nodes)}>{node.name}</Button>;
 };
 
 const ConfigComponent: React.FC = () => {
   const node = useContext(NodeContext);
-  return <div className="config-node">{node.name}</div>;
+  return <Button>{node.name}</Button>;
 };
 
 // function that truncates the etherum address
@@ -70,7 +98,7 @@ const MathNodeDisplay: React.FC = () => {
   return (
     <div className="condition-node">{`${node.name} → ${
       node?.data?.label || "?"
-    } ${node?.data?.state?.number || ""}`}</div>
+    } ${node?.data?.values?.number || ""}`}</div>
   );
 };
 

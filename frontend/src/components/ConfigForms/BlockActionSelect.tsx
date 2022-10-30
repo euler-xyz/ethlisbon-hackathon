@@ -33,28 +33,25 @@ const items = [
 ];
 
 const BlockInput: React.FC = () => {
-  const planner = useWeirollPlanner();
   const { selectedNode: node } = useContext(BuilderContext) as any;
   const { closeDrawer: cancel, saveDrawer: save } = useDrawer();
   const [selectedValue, setSelectedValue] = useState(node?.data?.key) as any;
   const [form] = Form.useForm();
 
   const handleSubmit = async () => {
-    const values = await form.validateFields();
+    // const values = await form.validateFields();
     const BlockLibrary = new Contract(LIBRARIES_ADDRESS, BlockABI);
     const createLibrary = WeirollContract.createLibrary(BlockLibrary);
     const call = createLibrary[selectedValue];
+    // find item by key
+    const item = items.find((item) => item.key === selectedValue);
 
     if (call) {
-      const ret = planner.add(call());
-      const { commands, state } = planner.plan();
-
       save({
-        label: selectedValue,
-        command: commands,
-        state: state,
-        values,
-        ret: ret,
+        call: (prevValue: any) => call(),
+        dependsOnPrev: false,
+        value: selectedValue,
+        label: item?.label,
       });
     }
   };
