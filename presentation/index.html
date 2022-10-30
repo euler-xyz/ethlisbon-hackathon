@@ -75,11 +75,11 @@
 
 <section data-markdown><script type="text/template">
 
-## Conditional Orders
+# Conditional Orders
 
 A gnosis safe module that lets you create custom standing orders to be executed by keepers when arbitrary conditions are met
 
-<div style="font-size: 60%">By: Dariusz Glowinski, Mick de Graaf, Doug Hoyte, Garv Khurana, Kasper Pawlowski, Rangel Stoilov</div>
+<div style="font-size: 60%">By:<br/> Dariusz Glowinski, Mick de Graaf, Doug Hoyte, <br/> Garv Khurana, Kasper Pawlowski, Rangel Stoilov</div>
 
 </script></section>
 
@@ -95,6 +95,7 @@ A gnosis safe module that lets you create custom standing orders to be executed 
 
 * Very flexible low-level way to express a sequence of CALL/DELEGATECALL/STATICCALL operations
 * Results from calls can be used as input to future calls
+* [https://github.com/weiroll/weiroll](https://github.com/weiroll/weiroll)
 
 </script></section>
 
@@ -135,7 +136,7 @@ A gnosis safe module that lets you create custom standing orders to be executed 
   * Price could be of *different* asset!
 * One-Cancels-All (atomic order clusters)
 * Leverage maintenance (automatically deleverage positions when price goes bad)
-* Hundreds of other order variations available in CeFi
+* Unlocks hundreds of other order variations available in CeFi
 
 </script></section>
 
@@ -145,8 +146,10 @@ A gnosis safe module that lets you create custom standing orders to be executed 
 
 ## Our UI
 
-* Advanced "drag-and-drop" order customisation interface
-* Runs in-browser, creates weiroll scripts ready to install into your gnosis safe
+* Advanced drag-and-drop order customisation interface
+* Runs in-browser, compiles weiroll scripts ready to install into your gnosis safe
+* Big built-in library of conditions, fully composable
+  * Literally money lego
 
 </script></section>
 
