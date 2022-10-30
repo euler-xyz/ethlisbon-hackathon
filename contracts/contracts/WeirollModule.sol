@@ -45,7 +45,9 @@ contract WeirollModule is VM, IDeferredLiquidityCheck {
 
     function execute(bytes32[] calldata commands, bytes[] memory state) public payable {
         require(msg.sender == currentSafe, "must be current safe");
-        IEulerExec(exec).deferLiquidityCheck(msg.sender, abi.encode(commands, state));   
+        _execute(commands, state);
+
+        //IEulerExec(exec).deferLiquidityCheck(msg.sender, abi.encode(commands, state));   
     }
 
     function onDeferredLiquidityCheck(bytes memory data) external {
@@ -63,6 +65,7 @@ contract WeirollModule is VM, IDeferredLiquidityCheck {
         uint256 reward = allowedScript[address(safe)][scriptHash];
         require(reward > 0, "not allowed to execute");
         require(currentSafe == address(0), "current safe must be zero");
+        require(safe.balance >= reward, "safe balance must be gte reward");
 
         bytes memory data = abi.encodeWithSignature(
             "execute(bytes32[],bytes[])",
