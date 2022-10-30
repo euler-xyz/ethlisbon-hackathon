@@ -11,12 +11,11 @@ contract WeirollModule is VM {
      string public constant VERSION = "0.1.0";
 
      address immutable public euler;
+     address public currentSafe;
 
      // This mapping represents specific script than can be executed
      // Safe -> Script Hash -> Reward
      mapping(address => mapping(bytes32 => uint256)) allowedScript;
-
-     address currentSafe;
 
      event OrderCreated(address indexed module, bytes32 indexed scriptHash, uint256 reward, bytes32[] commands, bytes[] state);
      event OrderRemoved(address indexed module, bytes32 indexed scriptHash);
@@ -41,7 +40,7 @@ contract WeirollModule is VM {
      }
 
     function execute(bytes32[] memory commands, bytes[] memory state) public payable {
-        //require(msg.sender == currentSafe, "must be current safe");
+        require(msg.sender == WeirollModule(address(this)).currentSafe(), "must be current safe");
         _execute(commands, state);
     }
 
