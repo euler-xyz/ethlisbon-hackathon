@@ -12,14 +12,14 @@ task("prepareSafe")
   .addPositionalParam("weirollModuleAddress")
   .setAction(async function (taskArguments: TaskArguments, { ethers }) {
     const signers = await ethers.getSigners();
-    const params = [
-      [signers[7].address],
-      ethers.utils.hexValue(100)
-    ]
-    await ethers.provider.send('tenderly_addBalance', params)
+    //const params = [
+    //  [signers[0].address],
+    //  ethers.utils.hexValue(ethers.utils.parseEther('100'))
+    //]
+    //await ethers.provider.send('tenderly_addBalance', params)
 
     const sdk = new Euler(ethers.provider)
-    const ethAdapter = new EthersAdapter({ethers, signer: signers[7]})
+    const ethAdapter = new EthersAdapter({ethers, signer: signers[0]})
     const safeFactory = await SafeFactory.create({ ethAdapter })
     const owners = taskArguments.owners.split(',')
     const threshold = taskArguments.threshold
@@ -27,14 +27,13 @@ task("prepareSafe")
     const safeSdk: Safe = await safeFactory.deploySafe({ safeAccountConfig })
     console.log("Safe deployed to: ", safeSdk.getAddress())
 
-    await signers[7].sendTransaction({
+    await signers[0].sendTransaction({
       to: safeSdk.getAddress(),
       value: ethers.utils.parseEther("0.01")
     })
-    const WETH = sdk.erc20(WETH_ADDRESS).connect(signers[7])
+    const WETH = sdk.erc20(WETH_ADDRESS).connect(signers[0])
     await WETH.transfer(safeSdk.getAddress(), ethers.utils.parseEther("0.01"))
 
-    //const safeSdk: Safe = await Safe.create({ ethAdapter, safeAddress: "0xdeF003E373ceef420677FB0d64e8781557cd4F74" })
     const safeTransaction = await safeSdk.createEnableModuleTx(taskArguments.weirollModuleAddress)
     const txHash = await safeSdk.getTransactionHash(safeTransaction)
     console.log("Module enabled, tx hash: ", txHash)

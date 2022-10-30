@@ -7,8 +7,8 @@ import Addresses from "@eulerxyz/euler-interfaces/addresses/addresses-mainnet.js
 task("deploy:Weiroll")
   .setAction(async function (taskArguments: TaskArguments, { ethers }) {
     const signers: SignerWithAddress[] = await ethers.getSigners();
-    const weirollFactory = await ethers.getContractFactory("WeirollModule", signers[7]);
-    const weiroll = await weirollFactory.deploy(Addresses.euler, Addresses.exec);
-    //await weiroll.deployed();
+    const weirollFactory = await ethers.getContractFactory("WeirollModule");
+    const weiroll = await weirollFactory.connect(signers[0]).deploy(Addresses.euler);
+    await weiroll.deployed();
     console.log("Weiroll Module deployed to: ", weiroll.address);
   });

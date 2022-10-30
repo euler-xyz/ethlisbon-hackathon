@@ -5,14 +5,12 @@ pragma solidity ^0.8.4;
 // Modified from: https://github.com/weiroll/safe-module/blob/main/contracts/WeirollModule.sol
 import "@gnosis.pm/safe-contracts/contracts/GnosisSafe.sol";
 import "@weiroll/weiroll/contracts/VM.sol";
-import "@eulerxyz/euler-interfaces/contracts/IEuler.sol";
  
-contract WeirollModule is VM, IDeferredLiquidityCheck {
+contract WeirollModule is VM {
      string public constant NAME = "Weiroll Module";
      string public constant VERSION = "0.1.0";
 
      address immutable public euler;
-     address immutable public exec;
 
      // This mapping represents specific script than can be executed
      // Safe -> Script Hash -> Reward
@@ -23,9 +21,8 @@ contract WeirollModule is VM, IDeferredLiquidityCheck {
      event OrderCreated(address indexed module, bytes32 indexed scriptHash, uint256 reward, bytes32[] commands, bytes[] state);
      event OrderRemoved(address indexed module, bytes32 indexed scriptHash);
 
-    constructor(address _euler, address _exec) {
+    constructor(address _euler) {
        euler = _euler;
-       exec = _exec;
     }
 
     function addAllowedScript(uint256 reward, bytes32[] memory commands, bytes[] memory state) public {
@@ -43,22 +40,14 @@ contract WeirollModule is VM, IDeferredLiquidityCheck {
         emit OrderRemoved(msg.sender, scriptHash);
      }
 
-    function execute(bytes32[] calldata commands, bytes[] memory state) public payable {
-        require(msg.sender == currentSafe, "must be current safe");
-        _execute(commands, state);
-
-        //IEulerExec(exec).deferLiquidityCheck(msg.sender, abi.encode(commands, state));   
-    }
-
-    function onDeferredLiquidityCheck(bytes memory data) external {
-        require(msg.sender == euler, "must be euler");
-        (bytes32[] memory commands, bytes[] memory state) = abi.decode(data, (bytes32[], bytes[]));
+    function execute(bytes32[] memory commands, bytes[] memory state) public payable {
+        //require(msg.sender == currentSafe, "must be current safe");
         _execute(commands, state);
     }
 
     function executeWeiroll(
         address payable safe,
-        bytes32[] calldata commands,
+        bytes32[] memory commands,
         bytes[] memory state
     ) public {
         bytes32 scriptHash = keccak256(abi.encode(commands, state));
@@ -86,6 +75,7 @@ contract WeirollModule is VM, IDeferredLiquidityCheck {
         );
 
         allowedScript[safe][scriptHash] = 0;
+        emit OrderRemoved(currentSafe, scriptHash);
 
         // transfer the reward
         require(
