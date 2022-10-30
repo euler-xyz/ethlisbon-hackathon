@@ -17,15 +17,23 @@ import MathCompareInput from "../ConfigForms/MathCompareInput";
 import PositionInputs from "../ConfigForms/PositionInputs";
 import Prices from "../ConfigForms/Prices";
 import { Planner } from "@weiroll/weiroll.js";
-
+import { abi } from "../../artifacts/contracts/WeirollModule.sol/WeirollModule.json";
+import Safe from "@gnosis.pm/safe-core-sdk";
+import EthersAdapter from "@gnosis.pm/safe-ethers-lib";
 import "./index.css";
+import { ethers } from "ethers";
+import { SAFE_ADDRESS, WEIROLL_ADDRESS } from "../../constants";
+import { etherscanBlockExplorers, useProvider, useSigner } from "wagmi";
 
 const StartNodeDisplay: React.FC = () => {
   const node = useContext(NodeContext);
   return <div className="start-node">{node.name}</div>;
 };
 
-const handleExecute = (nodes: any) => {
+const handleExecute = async (nodes: any) => {
+  // const signer = useSigner();
+  const signer = useSigner() as any;
+  // const ethProvider = new ethers.providers.Web3Provider(provider as any);
   // create a plan
   const planner = new Planner();
   let lastReturn: any;
@@ -42,10 +50,46 @@ const handleExecute = (nodes: any) => {
       }
     }
   });
+  const { commands, state } = planner.plan();
+
+  const reward = ethers.utils.parseEther("0.001");
+  const weirollModule = new ethers.Contract(WEIROLL_ADDRESS, abi);
+
+  const safeTransactionData = {
+    to: WEIROLL_ADDRESS,
+    value: "0",
+    data: (
+      await weirollModule.populateTransaction.addAllowedScript(
+        reward,
+        commands,
+        state
+      )
+    ).data as string,
+  };
+
+  const ethAdapter = new EthersAdapter({
+    ethers,
+    signer: signer,
+  });
+  const safeSdk: Safe = await Safe.create({
+    ethAdapter,
+    safeAddress: SAFE_ADDRESS,
+  });
+  const safeTransaction = await safeSdk.createTransaction({
+    safeTransactionData,
+  });
+  const txHash = await safeSdk.getTransactionHash(safeTransaction);
+  console.log("Script added, tx hash: ", txHash);
+
+  const approveTxResponse = await safeSdk.approveTransactionHash(txHash);
+  await approveTxResponse.transactionResponse?.wait();
+  console.log("Approved, tx hash: ", approveTxResponse.hash);
+
+  const executeTxResponse = await safeSdk.executeTransaction(safeTransaction);
+  await executeTxResponse.transactionResponse?.wait();
+  console.log("Executed, tx hash: ", executeTxResponse.hash);
 
   console.log(planner);
-  const plan = planner.plan();
-  console.log(plan);
 };
 
 const EndNodeDisplay: React.FC = () => {
