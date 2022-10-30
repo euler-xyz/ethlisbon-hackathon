@@ -25,11 +25,7 @@ const StartNodeDisplay: React.FC = () => {
   return <div className="start-node">{node.name}</div>;
 };
 
-const handleExecute = () => {};
-
-const EndNodeDisplay: React.FC = () => {
-  const node = useContext(NodeContext);
-  const { nodes } = useContext(BuilderContext) as any;
+const handleExecute = (nodes: any) => {
   // create a plan
   const planner = new Planner();
   let lastReturn: any;
@@ -46,13 +42,17 @@ const EndNodeDisplay: React.FC = () => {
       }
     }
   });
-  // nodes.forEach((node: any) => {
-  //   console.log(node);
-  // });
+
   console.log(planner);
   const plan = planner.plan();
   console.log(plan);
-  return <Button onClick={(val) => console.log(nodes)}>{node.name}</Button>;
+};
+
+const EndNodeDisplay: React.FC = () => {
+  const node = useContext(NodeContext);
+  const { nodes } = useContext(BuilderContext) as any;
+
+  return <Button onClick={(val) => handleExecute(nodes)}>{node.name}</Button>;
 };
 
 const ConfigComponent: React.FC = () => {

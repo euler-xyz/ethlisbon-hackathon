@@ -9,7 +9,7 @@ import { metaMaskWallet, walletConnectWallet } from "@rainbow-me/rainbowkit/wall
 
 export const { chains, provider } = configureChains(
   [chain.mainnet, chain.goerli],
-  [alchemyProvider({ apiKey: import.meta.env.VITE_ALCHEMY_ID }), publicProvider()]
+  [alchemyProvider({ apiKey: import.meta.env.VITE_ALCHEMY_ID || "h0Vnzg4K2U330ks8dZNKwr7dTjiTClDh" }), publicProvider()]
 );
 
 // const { connectors } = getDefaultWallets({
