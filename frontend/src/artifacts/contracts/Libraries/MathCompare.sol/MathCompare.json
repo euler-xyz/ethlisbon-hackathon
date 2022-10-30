@@ -1,0 +1,155 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "MathCompare",
+  "sourceName": "contracts/Libraries/MathCompare.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "a",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "b",
+          "type": "uint256"
+        }
+      ],
+      "name": "eq",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "a",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "b",
+          "type": "uint256"
+        }
+      ],
+      "name": "gt",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "a",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "b",
+          "type": "uint256"
+        }
+      ],
+      "name": "gte",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "a",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "b",
+          "type": "uint256"
+        }
+      ],
+      "name": "lt",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "a",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "b",
+          "type": "uint256"
+        }
+      ],
+      "name": "lte",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "a",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "b",
+          "type": "uint256"
+        }
+      ],
+      "name": "neq",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b50610129806100206000396000f3fe608060405234801561001057600080fd5b50600436106100725760003560e01c80637c6ed9ef116100505780637c6ed9ef146100c1578063b4773329146100d4578063ea6515c4146100e757600080fd5b8063118fc88c1461007757806321e5749b1461009d57806332148d73146100af575b600080fd5b6100896100853660046100fa565b1190565b604051901515815260200160405180910390f35b6100896100ab3660046100fa565b1090565b6100896100bd3660046100fa565b1490565b6100896100cf3660046100fa565b141590565b6100896100e23660046100fa565b111590565b6100896100f53660046100fa565b101590565b6000806040838503121561010d57600080fd5b5050803592602090910135915056fea164736f6c6343000811000a",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100725760003560e01c80637c6ed9ef116100505780637c6ed9ef146100c1578063b4773329146100d4578063ea6515c4146100e757600080fd5b8063118fc88c1461007757806321e5749b1461009d57806332148d73146100af575b600080fd5b6100896100853660046100fa565b1190565b604051901515815260200160405180910390f35b6100896100ab3660046100fa565b1090565b6100896100bd3660046100fa565b1490565b6100896100cf3660046100fa565b141590565b6100896100e23660046100fa565b111590565b6100896100f53660046100fa565b101590565b6000806040838503121561010d57600080fd5b5050803592602090910135915056fea164736f6c6343000811000a",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

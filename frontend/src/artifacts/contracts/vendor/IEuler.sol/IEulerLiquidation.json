@@ -1,0 +1,110 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IEulerLiquidation",
+  "sourceName": "contracts/vendor/IEuler.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "liquidator",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "violator",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "underlying",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "collateral",
+          "type": "address"
+        }
+      ],
+      "name": "checkLiquidation",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "repay",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "yield",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "healthScore",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "baseDiscount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "discount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "conversionRate",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IEulerLiquidation.LiquidationOpportunity",
+          "name": "liqOpp",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "violator",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "underlying",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "collateral",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "repay",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "minYield",
+          "type": "uint256"
+        }
+      ],
+      "name": "liquidate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

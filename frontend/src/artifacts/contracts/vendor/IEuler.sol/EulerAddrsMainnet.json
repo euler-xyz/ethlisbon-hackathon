@@ -1,0 +1,76 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "EulerAddrsMainnet",
+  "sourceName": "contracts/vendor/IEuler.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "euler",
+      "outputs": [
+        {
+          "internalType": "contract IEuler",
+          "name": "",
+          "type": "IEuler"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "exec",
+      "outputs": [
+        {
+          "internalType": "contract IEulerExec",
+          "name": "",
+          "type": "IEulerExec"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "liquidation",
+      "outputs": [
+        {
+          "internalType": "contract IEulerLiquidation",
+          "name": "",
+          "type": "IEulerLiquidation"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "markets",
+      "outputs": [
+        {
+          "internalType": "contract IEulerMarkets",
+          "name": "",
+          "type": "IEulerMarkets"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "swap",
+      "outputs": [
+        {
+          "internalType": "contract IEulerSwap",
+          "name": "",
+          "type": "IEulerSwap"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x61013361003a600b82828239805160001a60731461002d57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600436106100715760003560e01c8063c1c0e9c41161005a578063c1c0e9c4146100d5578063db661b71146100f0578063f2dfbf661461010b57600080fd5b80633ac2a032146100765780638119c065146100ba575b600080fd5b610091733520d5a913427e6f0d6a83e07ccd4a4da316e4d381565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f35b610091737123c8cbbd76c5c7fcc9f7150f23179bec0ba34181565b6100917359828fdf7ee634aaad3f58b19fdba3b03e2d9d8081565b6100917327182842e098f60e3d576794a5bffb0777e025d381565b61009173f43ce1d09050bafd6980dd43cde2ab9f18c85b348156fea164736f6c6343000811000a",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600436106100715760003560e01c8063c1c0e9c41161005a578063c1c0e9c4146100d5578063db661b71146100f0578063f2dfbf661461010b57600080fd5b80633ac2a032146100765780638119c065146100ba575b600080fd5b610091733520d5a913427e6f0d6a83e07ccd4a4da316e4d381565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f35b610091737123c8cbbd76c5c7fcc9f7150f23179bec0ba34181565b6100917359828fdf7ee634aaad3f58b19fdba3b03e2d9d8081565b6100917327182842e098f60e3d576794a5bffb0777e025d381565b61009173f43ce1d09050bafd6980dd43cde2ab9f18c85b348156fea164736f6c6343000811000a",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

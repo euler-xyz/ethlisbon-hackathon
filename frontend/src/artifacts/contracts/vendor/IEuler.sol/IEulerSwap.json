@@ -1,0 +1,386 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IEulerSwap",
+  "sourceName": "contracts/vendor/IEuler.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "subAccountIdIn",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "subAccountIdOut",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "underlyingIn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "underlyingOut",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountOutMinimum",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "payload",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IEulerSwap.Swap1InchParams",
+          "name": "params",
+          "type": "tuple"
+        }
+      ],
+      "name": "swap1Inch",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "subAccountIdIn",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "subAccountIdOut",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountOut",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountInMaximum",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "deadline",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "path",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IEulerSwap.SwapUniExactOutputParams",
+          "name": "params",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "targetDebt",
+          "type": "uint256"
+        }
+      ],
+      "name": "swapAndRepayUni",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "subAccountIdIn",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "subAccountIdOut",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "underlyingIn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "underlyingOut",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountOut",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountInMaximum",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "deadline",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint24",
+              "name": "fee",
+              "type": "uint24"
+            },
+            {
+              "internalType": "uint160",
+              "name": "sqrtPriceLimitX96",
+              "type": "uint160"
+            }
+          ],
+          "internalType": "struct IEulerSwap.SwapUniExactOutputSingleParams",
+          "name": "params",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "targetDebt",
+          "type": "uint256"
+        }
+      ],
+      "name": "swapAndRepayUniSingle",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "subAccountIdIn",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "subAccountIdOut",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountIn",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountOutMinimum",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "deadline",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "path",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IEulerSwap.SwapUniExactInputParams",
+          "name": "params",
+          "type": "tuple"
+        }
+      ],
+      "name": "swapUniExactInput",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "subAccountIdIn",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "subAccountIdOut",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "underlyingIn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "underlyingOut",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountIn",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountOutMinimum",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "deadline",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint24",
+              "name": "fee",
+              "type": "uint24"
+            },
+            {
+              "internalType": "uint160",
+              "name": "sqrtPriceLimitX96",
+              "type": "uint160"
+            }
+          ],
+          "internalType": "struct IEulerSwap.SwapUniExactInputSingleParams",
+          "name": "params",
+          "type": "tuple"
+        }
+      ],
+      "name": "swapUniExactInputSingle",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "subAccountIdIn",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "subAccountIdOut",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountOut",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountInMaximum",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "deadline",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "path",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IEulerSwap.SwapUniExactOutputParams",
+          "name": "params",
+          "type": "tuple"
+        }
+      ],
+      "name": "swapUniExactOutput",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "subAccountIdIn",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "subAccountIdOut",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "underlyingIn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "underlyingOut",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountOut",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountInMaximum",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "deadline",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint24",
+              "name": "fee",
+              "type": "uint24"
+            },
+            {
+              "internalType": "uint160",
+              "name": "sqrtPriceLimitX96",
+              "type": "uint160"
+            }
+          ],
+          "internalType": "struct IEulerSwap.SwapUniExactOutputSingleParams",
+          "name": "params",
+          "type": "tuple"
+        }
+      ],
+      "name": "swapUniExactOutputSingle",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
