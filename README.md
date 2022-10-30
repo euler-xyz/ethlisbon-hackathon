@@ -4,7 +4,9 @@
 
 A gnosis safe module that lets you create custom standing orders to be executed by keepers when arbitrary conditions are met
 
-This was built for the [ETH Lisbon](https://www.ethlisbon.org/) hackathon.
+This was built for the [ETH Lisbon](https://www.ethlisbon.org/) 2022 hackathon.
+
+[Presentation](https://euler-xyz.github.io/ethlisbon-hackathon/presentation/index.html#/)
 
 ## Architecture
 
